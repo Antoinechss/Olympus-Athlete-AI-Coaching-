@@ -15,8 +15,16 @@ app.secret_key = 'Antoine'
 DEFAULT_COACH = 'canova'
 
 @app.route('/')
-def index():
+def home():
+    return render_template('home.html')
+
+@app.route('/dashboard')
+def dashboard():
     return render_template('index.html')
+
+@app.route('/coaches')
+def coach_choice():
+    return render_template('coaches.html')
 
 @app.route('/api/workouts')
 def get_workouts():
@@ -46,16 +54,12 @@ def get_workouts():
         import traceback
         traceback.print_exc()
         return jsonify({"error": str(e)})
-    
-@app.route('/coaches')
-def coach_choice():
-    return render_template('coaches.html')
 
 @app.route('/api/select-coach', methods=['POST'])
 def select_coach():
     """Store the selected coach in the current session"""
     data = request.get_json()
-    coach_persona = data.get('coach_persona')  # Keep this as is
+    coach_persona = data.get('coach_persona')
     
     if coach_persona in COACH_PERSONALITIES:
         session['selected_coach'] = coach_persona
@@ -72,7 +76,7 @@ def select_coach():
 @app.route('/api/get-selected-coach')
 def get_selected_coach():
     """Get the currently selected coach"""
-    selected_coach = session.get('selected_coach', DEFAULT_COACH)  
+    selected_coach = session.get('selected_coach', DEFAULT_COACH)
     coach_info = COACH_PERSONALITIES.get(selected_coach, COACH_PERSONALITIES[DEFAULT_COACH])
     return jsonify({
         "coach_type": selected_coach,
@@ -98,7 +102,6 @@ def ask_coach():
         db_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'workouts.db')
         db = WorkoutDatabase(db_path)
         workouts = db.get_formatted_summary()[:10]
-        
 
         # Create coach & answer question
         coach = Coach(past_workouts=workouts,
@@ -117,4 +120,4 @@ def ask_coach():
         return jsonify({"error": str(e)})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=8080)
