@@ -4,16 +4,21 @@
 
 ## Demo Preview
 
-<p align="center">
-  <img src="screenshots/dashboard.png" width="45%" />
-  <img src="screenshots/workouts.png" width="45%" />
-  <img src="screenshots/coaches.png" width="45%" />
-</p>
+<div align="center">
 
-<p align="center">
-  <img src="screenshots/homepage.png" width="45%" />
-  <img src="screenshots/coach.png" width="45%" />
-</p>
+| Dashboard | Workouts |
+|:---------:|:--------:|
+| <img src="screenshots/dashboard.png" width="400" alt="Dashboard"/> | <img src="screenshots/workouts.png" width="400" alt="Workouts"/> |
+
+| Coaches | Homepage |
+|:-------:|:--------:|
+| <img src="screenshots/coaches.png" width="400" alt="Coaches"/> | <img src="screenshots/homepage.png" width="400" alt="Homepage"/> |
+
+| Coach Chat |
+|:----------:|
+| <img src="screenshots/coach.png" width="600" alt="Coach Chat"/> |
+
+</div>
 
 
 ## Project Overview
